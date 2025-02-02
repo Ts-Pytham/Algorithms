@@ -1,4 +1,4 @@
-﻿using Algorithms.Math;
+﻿using Algorithms.Math.Arithmetic;
 using System.Collections.Generic;
 
 namespace Algorithms;
