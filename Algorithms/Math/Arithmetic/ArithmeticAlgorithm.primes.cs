@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 
 namespace Algorithms.Math.Arithmetic;
 
@@ -29,7 +30,7 @@ public static partial class ArithmeticAlgorithm
         }
         var limit = System.Math.Sqrt(number);
 
-        for (int i = 3; i <= limit; i += 2)
+        for (long i = 3; i <= limit; i += 2)
         {
             if (number % i == 0)
             {
@@ -37,6 +38,46 @@ public static partial class ArithmeticAlgorithm
             }
         }
         return true;
+    }
+
+    /// <summary>
+    /// Determines whether a given number is prime using the Sieve of Eratosthenes algorithm.
+    /// </summary>
+    /// <param name="number">The number to check for primality.</param>
+    /// <returns><c>true</c> if the number is prime; otherwise, <c>false</c>.</returns>
+    /// <remarks>
+    /// This method creates a sieve up to the given number and checks if it remains unmarked.
+    /// It has a time complexity of O(n log log n), making it inefficient for checking 
+    /// a single prime number. The Sieve of Eratosthenes is best suited for generating 
+    /// multiple primes rather than individual checks.
+    /// </remarks>
+    public static bool IsPrimeBySieveOfEratosthenes(this long number)
+    {
+        if (number < 2)
+        {
+            return false;
+        }
+        else if (number < 4)
+        {
+            return true;
+        }
+
+        var sieve = new bool[number + 1];
+        for (long i = 2; i <= number; i++)
+        {
+            if (!sieve[i])
+            {
+                if (i == number)
+                {
+                    return true;
+                }
+                for (long j = i * i; j <= number; j += i)
+                {
+                    sieve[j] = true;
+                }
+            }
+        }
+        return false;
     }
 
     /// <summary>
